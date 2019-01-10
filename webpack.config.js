@@ -1,11 +1,13 @@
-const webpack = require('webpack');
-const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  entry: ['webpack/hot/poll?100', './src/main.ts'],
+  entry: ['./src/main.ts'],
   watch: true,
-  target: 'node',
+  target: 'node', // <-- Important
+  output: {
+    filename: 'index.js', // <-- Important
+    libraryTarget: 'this' // <-- Important
+  },
   externals: [
     nodeExternals({
       whitelist: ['webpack/hot/poll?100'],
@@ -15,18 +17,20 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        loader: 'ts-loader',
         exclude: /node_modules/,
-      },
-    ],
+        options: {
+          transpileOnly: true
+        }
+      }
+    ]
   },
-  mode: 'development',
+  // mode: 'development',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js']
+  },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'server.js',
-  },
+  externals: [nodeExternals()] // <-- Important
 };
