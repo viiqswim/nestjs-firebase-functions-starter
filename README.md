@@ -11,6 +11,9 @@ This project includes the following:
 4. Install the [firebase CLI](https://firebase.google.com/docs/cli/) tools
 5. You're done!
 
+# Environment setup
+1. Install typescript globally: `npm install -g typescript`
+
 ## Installation
 
 ```bash
