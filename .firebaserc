@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "nestjs-firebase-001"
+  }
+}
